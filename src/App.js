@@ -24,9 +24,9 @@ function App() {
     const data = await resp.json();
     const transformData = data.docs.map((film) => [
       film.name,
+      film.name.trim().toLowerCase().split(' ').join('-'),
       film.boxOfficeRevenueInMillions,
       film.academyAwardNominations,
-      film.name.trim().toLowerCase().split(' ').join('-'),
     ]);
 
     setFilms(transformData);
