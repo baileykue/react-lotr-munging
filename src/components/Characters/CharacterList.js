@@ -4,7 +4,7 @@ export default function CharacterList({ characters }) {
   return (
     <section className="characters">
       {characters.map((char) => (
-        <div className="character" key={char.name}>
+        <div className="character" key={char.id}>
           <a href={char.wikiUrl}>{char.name}</a>
           <p>{char.dates}</p>
         </div>

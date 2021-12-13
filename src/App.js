@@ -26,19 +26,27 @@ function App() {
       film.name,
       film.boxOfficeRevenueInMillions,
       film.academyAwardNominations,
+      film.name.trim().toLowerCase().split(' ').join('-'),
     ]);
 
     setFilms(transformData);
   };
 
   const getCharacters = async () => {
-    const resp = await fetch('https://the-one-api.dev/v2/movie/', {
+    const resp = await fetch('https://the-one-api.dev/v2/character/?limit=25', {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
       },
     });
 
-    return [];
+    const data = await resp.json();
+    const transformData = data.docs.map((character) => ({
+      ...character,
+      dates:
+        character.birth && character.death ? `${character.birth} - ${character.death}` : 'Unknown',
+    }));
+
+    setCharacters(transformData);
   };
 
   return (
